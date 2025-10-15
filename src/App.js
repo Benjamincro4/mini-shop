@@ -9,9 +9,13 @@ function App() {
     <BrowserRouter>
       <div className="app-container">
         <header className="header">
-          <h1>Mini-Shop</h1>
+          <h1>📱 MiniShop</h1>
+          <nav>
+            <a href="/">Inicio</a>
+            <a href="#about">Sobre nosotros</a>
+            <a href="#contact">Contacto</a>
+          </nav>
         </header>
-
         <Routes>
           <Route path="/" element={<ProductList />} />
           <Route path="/product/:id" element={<ProductDetail />} />
@@ -22,5 +26,4 @@ function App() {
 }
 
 export default App;
-
 
