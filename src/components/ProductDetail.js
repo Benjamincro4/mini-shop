@@ -1,27 +1,46 @@
-import React from "react";
-import { useParams, Link } from "react-router-dom";
-import products from "../data/products";
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { getProductById } from '../services/api';
+import { getWithCache } from '../utils/cache';
+import ProductDescription from './ProductDescription';
+import ProductActions from './ProductActions';
 
-function ProductDetail() {
+export default function ProductDetail() {
   const { id } = useParams();
-  const product = products.find((p) => p.id === Number(id));
+  const [p, setP] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState('');
 
-  if (!product) {
-    return <p>Producto no encontrado</p>;
-  }
+  useEffect(() => {
+    let alive = true;
+    setLoading(true);
+    getWithCache(`product:${id}`, () => getProductById(id))
+      .then(data => {
+        if (!alive) return;
+        setP({ ...data, imgUrl: data.imgUrl || data.photo || data.image || undefined });
+        setErr('');
+      })
+      .catch(e => setErr(e.message))
+      .finally(() => setLoading(false));
+    return () => { alive = false; };
+  }, [id]);
+
+  if (loading) return <p className="status">Cargando producto…</p>;
+  if (err) return <p className="status error">Error: {err}</p>;
+  if (!p) return <p className="status">Producto no encontrado</p>;
 
   return (
-    <div className="product-detail">
-      <img src={product.image} alt={product.name} />
-      <div className="info">
-        <h2>{product.name}</h2>
-        <p><strong>Marca:</strong> {product.brand}</p>
-        <p><strong>Precio:</strong> {product.price} €</p>
-        <p>{product.description}</p>
-        <Link to="/" className="btn">Volver</Link>
+    <div className="pdp">
+      <div className="pdp-left">
+        {p.imgUrl ? <img src={p.imgUrl} alt={`${p.brand} ${p.model}`} /> : <div className="img-ph large">Sin imagen</div>}
+      </div>
+
+      <div className="pdp-right">
+        <h2 className="title">{p.brand} {p.model}</h2>
+        <ProductDescription p={p} />
+        <ProductActions p={p} />
+        <Link to="/" className="btn link">← Volver al listado</Link>
       </div>
     </div>
   );
 }
-
-export default ProductDetail;

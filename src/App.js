@@ -1,29 +1,22 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ProductList from "./components/ProductList";
-import ProductDetail from "./components/ProductDetail";
-import "./styles.css";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './context/CartContext';
+import Header from './components/Header';
+import ProductList from './components/ProductList';
+import ProductDetail from './components/ProductDetail';
+import './styles.css';
 
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
-      <div className="app-container">
-        <header className="header">
-          <h1>📱 MiniShop</h1>
-          <nav>
-            <a href="/">Inicio</a>
-            <a href="#about">Sobre nosotros</a>
-            <a href="#contact">Contacto</a>
-          </nav>
-        </header>
+    <CartProvider>
+      <BrowserRouter>
+        <Header />
         <Routes>
           <Route path="/" element={<ProductList />} />
           <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </CartProvider>
   );
 }
-
-export default App;
 
