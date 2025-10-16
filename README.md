@@ -1,18 +1,17 @@
 # MiniShop - Front-End Test
 
-Aplicación SPA desarrollada con **React** para simular una tienda de dispositivos móviles.
-
 ## Descripción general
 
-La aplicación consta de **dos vistas principales**:
+Mini Shop es una miniaplicación SPA desarrollada en **React**, que permite listar y consultar detalles de dispositivos móviles, además de añadirlos a un carrito de compra.
 
-1. **Vista principal – Listado de productos**  
-   Muestra una cuadrícula con los distintos dispositivos móviles disponibles, con su nombre, marca, imagen y precio.
+La aplicación cumple con todos los requisitos del test técnico, incluyendo:
+- Listado de productos (PLP) con búsqueda en tiempo real.  
+- Detalle de producto (PDP) con selector de color y almacenamiento.  
+- Carrito global persistente en cabecera.  
+- Enrutado SPA con React Router.  
+- Caché local de 1 hora para reducir llamadas a la API.  
 
-2. **Vista de detalles del producto**  
-   Al hacer clic en un producto, se muestra una vista detallada con su información completa y un botón para volver al listado.
-
-Toda la navegación se realiza **sin recargar la página**, utilizando **React Router DOM** (enrutado del lado del cliente), cumpliendo con el concepto de **SPA**.
+---
 
 ## Scripts disponibles
 | Comando | Descripción |
@@ -23,13 +22,40 @@ Toda la navegación se realiza **sin recargar la página**, utilizando **React R
 | `npm run lint` | Analiza el código con ESLint |
 
 ## Instalación y ejecución
-1. Clonar este repositorio  
-   ```bash
+### 1. Clonar este repositorio  
+   bash
    git clone https://github.com/Benjamincro4/mini-shop.git
    cd mini-shop
 
-2. Instalar dependencias
+### 2. Instalar dependencias
    npm install
 
-3. Iniciar app
+### 3. Iniciar app
    npm start
+
+### 4. Compilación
+   npm run build
+
+### 5. Test y lint
+   npm test
+   npm run lint
+
+## Estructura del Proyecto
+   src/
+      components/
+         Header.js
+         SearchBar.js
+         ProductItem.js
+         ProductList.js
+         ProductDetail.js
+         ProductDescription.js
+         ProductActions.js
+      context/
+         CartContext.js
+      services/
+         api.js
+      utils/
+         cache.js
+      App.js
+      index.js
+      styles.css   
