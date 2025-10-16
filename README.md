@@ -42,20 +42,20 @@ La aplicación cumple con todos los requisitos del test técnico, incluyendo:
 
 ## Estructura del Proyecto
    src/
-      components/
-         Header.js
-         SearchBar.js
-         ProductItem.js
-         ProductList.js
-         ProductDetail.js
-         ProductDescription.js
-         ProductActions.js
-      context/
-         CartContext.js
-      services/
-         api.js
-      utils/
-         cache.js
-      App.js
-      index.js
-      styles.css   
+├── components/
+│   ├── Header.js
+│   ├── SearchBar.js
+│   ├── ProductItem.js
+│   ├── ProductList.js
+│   ├── ProductDetail.js
+│   ├── ProductDescription.js
+│   └── ProductActions.js
+├── context/
+│   └── CartContext.js
+├── services/
+│   └── api.js
+├── utils/
+│   └── cache.js
+├── App.js
+├── index.js
+└── styles.css   
